@@ -40,11 +40,10 @@ class Inventory():
         #need to make cursor to call queries
         cursor = connection.cursor()
 
-        cursor.execute(f'SELECT ISBN FROM {self.tableName}')
+        cursor.execute('SELECT * FROM Inventory')
 
         result = cursor.fetchall()
-        print(type(result[0]))
-        print(result[0][0])
+        print(result)
 
 
         quit
@@ -83,9 +82,15 @@ class Inventory():
     """
 
 
+print("a")
 
 myInventory = Inventory('Inventory.db', 'inventory') #have to change the functions to user class fields instead of string literals
+
+print("b")
+
 myInventory.viewInventory
+
+print("c")
 
 
 
