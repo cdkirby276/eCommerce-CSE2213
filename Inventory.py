@@ -30,6 +30,7 @@ class Inventory():
     """
 
     def viewInventory(): #Displays all items in the inventory in some formatted way
+        print('d')
         try:
             connection = sqlite3.connect("Inventory.db")
             print("Connected to Inventory.db")
@@ -40,7 +41,7 @@ class Inventory():
         #need to make cursor to call queries
         cursor = connection.cursor()
 
-        cursor.execute('SELECT * FROM Inventory')
+        cursor.execute('SELECT * FROM inventory')
 
         result = cursor.fetchall()
         print(result)
