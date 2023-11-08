@@ -118,19 +118,18 @@ class Cart():
         cursor.execute(f'SELECT ISBN FROM {self.tableName} WHERE UserID = {userID}')
         result = cursor.fetchall() #gives us a list of tuples
         
+        return #remove when we get the inventory class!
         for temp in result:
-            #remove row from table:
             cartItem = temp[0] #ISBN as an int
-            cursor.execute(f'DELETE FROM {self.tableName} WHERE UserID = {userID} AND ISBN = {cartItem}')
-            connection.commit()
-
             #update the inventory database accordingly:
             #!!CALL DECREASE STOCK FUNCTION HERE!!
 
-
+            #remove row from table:
+            cursor.execute(f'DELETE FROM {self.tableName} WHERE UserID = {userID} AND ISBN = {cartItem}')
+            connection.commit()
+            
 myCart = Cart('cart.db', 'cart') #have to change the functions to user class fields instead of string literals
-#myCart.viewCart('999', 'dont got it yet')
-#myCart.checkOut('999')
+
 
 
 
