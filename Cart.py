@@ -7,6 +7,7 @@ Cart class for group project
 """
 import sqlite3
 import sys
+import Inventory
 
 class Cart():
 
@@ -26,10 +27,9 @@ class Cart():
     def viewCart(self, userID, inventoryDatabase):
         #find all instances in cart.db that match the userID
         try:
-            connection = sqlite3.connect("cart.db")
-            print("Connected to cart.db")
+            connection = sqlite3.connect(self.databaseName)
         except:
-            print("Failed to connect cart.db")
+            print("Failed to connect cart database")
             sys.exit()
         
         #need to make cursor to call queries
@@ -40,11 +40,7 @@ class Cart():
 
         #gives us all the book primary keys that are in our user's cart
         result = cursor.fetchall() #:: gives us a list of tuples
-        print(type(result[0]))
-        print(result[0][0])
 
-        return #remove this once we get the inventory db
-    
         #connect to inventory database
         try:
             connection = sqlite3.connect(inventoryDatabase)
@@ -59,14 +55,12 @@ class Cart():
             print(currentBook) #will have to format the output once we get inventory db
 
 
-
     """
     Adds another row to the cart table
     """
     def addToCart(self, userID, ISBN):
         try:
             connection = sqlite3.connect(self.databaseName)
-            #print(f'Connected to {self.databaseName}!')
         except:
             print("Failed to connect")
             sys.exit()
@@ -78,7 +72,6 @@ class Cart():
         #want the userID and ISBN to match the function parameters
         cursor.execute(f"INSERT INTO {self.tableName}(UserID, ISBN, Quantity) VALUES({userID}, {ISBN}, 1)")
 
-        #print("Added item to cart!")
         connection.commit()
         
     """
@@ -97,10 +90,8 @@ class Cart():
         #need to delete from cart.db
         cursor.execute(f"DELETE FROM {self.tableName} WHERE UserId = {userID} AND ISBN = {ISBN}")
 
-        #print("Removed item from cart!")
         connection.commit()
 
-    #NOT DONE!!!!!
     """
     Removes all the times that match the userID and updates the inventory database based on the amount of books sold in the users cart
 
@@ -118,11 +109,14 @@ class Cart():
         cursor.execute(f'SELECT ISBN FROM {self.tableName} WHERE UserID = {userID}')
         result = cursor.fetchall() #gives us a list of tuples
         
-        return #remove when we get the inventory class!
+        return #NEED TO FIX
+               #Interaction with Inventory class is not working 
         for temp in result:
             cartItem = temp[0] #ISBN as an int
             #update the inventory database accordingly:
             #!!CALL DECREASE STOCK FUNCTION HERE!!
+            tmpInventory = Inventory()
+
 
             #remove row from table:
             cursor.execute(f'DELETE FROM {self.tableName} WHERE UserID = {userID} AND ISBN = {cartItem}')
