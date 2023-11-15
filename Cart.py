@@ -7,7 +7,7 @@ Cart class for group project
 """
 import sqlite3
 import sys
-import Inventory
+from Inventory import Inventory
 
 class Cart():
 
@@ -109,13 +109,16 @@ class Cart():
         cursor.execute(f'SELECT ISBN FROM {self.tableName} WHERE UserID = {userID}')
         result = cursor.fetchall() #gives us a list of tuples
         
-        return #NEED TO FIX
+         #NEED TO FIX
                #Interaction with Inventory class is not working 
+        tmpInventory = Inventory('Inventory.db', 'inventory')
         for temp in result:
-            cartItem = temp[0] #ISBN as an int
+            cartItem = temp[0] #ISBN as an int #must conver to a string
             #update the inventory database accordingly:
             #!!CALL DECREASE STOCK FUNCTION HERE!!
-            tmpInventory = Inventory()
+            print(cartItem)
+            tmpInventory.decreaseStock(cartItem)
+
 
 
             #remove row from table:
@@ -123,7 +126,7 @@ class Cart():
             connection.commit()
             
 myCart = Cart('cart.db', 'cart') #have to change the functions to user class fields instead of string literals
-
+myCart.checkOut("678")
 
 
 

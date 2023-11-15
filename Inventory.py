@@ -127,12 +127,9 @@ class Inventory():
 myInventory = Inventory('Inventory.db', 'inventory') #have to change the functions to user class fields instead of string literals
 
 
-myInventory.viewInventory()
 
 
-myInventory.searchInventory("Example")
 
-myInventory.decreaseStock("1")
 
 
 
