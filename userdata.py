@@ -1,9 +1,18 @@
-class User:
-    def __init__(self, user_id, password, admin, address):
-        self.User_ID = user_id
-        self.Password = password
-        self.admin = admin
-        self.Address = address
+
+class User():
+
+    #jps683 changed the constructors to work
+    def __init__(self):
+        self.databaseName = ''
+        self.tableName = ''
+        self.loggedin = False
+        self.userID = ''
+        
+    def __init__(self, databaseName, tableName):
+        self.databaseName = databaseName
+        self.tableName = tableName
+        self.loggedin = False
+        self.userID = ''
 
     def Get_Usr(self):
         return self.User_ID
