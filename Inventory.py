@@ -48,7 +48,8 @@ class Inventory():
 
         result = cursor.fetchall()
         for item in result:
-            print(f'{item[0]}. {item[1]} {item[2]} {item[3]} {item[4]} {item[5]} {item[6]}')
+            print(f'ISBN : {item[0]} Title : {item[1]} Author : {item[2]} Genre : {item[3]} Pages : {item[4]} Release Date : {item[5]} Stock : {item[6]}')
+            print()
             
 
 
