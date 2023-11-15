@@ -1,20 +1,31 @@
 class User:
-    def __init__(self, databaseName, tableName):
-        self.databaseName = databaseName
-        self.tableName = tableName
-    def Get_User():
-        pass
-    def Get_Password():
-        pass
-    def is_admin():
-        pass
-    def Get_address():
-        pass
-    def Set_User():
-        pass
-    def Set_Password():
-        pass
-    def Set_Admin():
-        pass
-    def Set_Address():
-        pass
+    def __init__(self, user_id, password, admin, address):
+        self.User_ID = user_id
+        self.Password = password
+        self.admin = admin
+        self.Address = address
+
+    def Get_Usr(self):
+        return self.User_ID
+
+    def Get_Pas(self):
+        return self.Password
+
+    def is_admin(self):
+        return self.admin
+
+    def Get_address(self):
+        return self.Address
+
+    def Set_Usr(self, user):
+        self.User_ID = user
+
+    def Set_Pas(self, password):
+        self.Password = password
+
+    def Set_admin(self, admin):
+        self.admin = admin
+
+    def Set_address(self, address):
+        self.Address = address
+
