@@ -51,19 +51,19 @@ class Cart():
 
         counter = 1;
         for bookID in result:#looping through our matching userIDs
-            cursor.execute(f'SELECT Title, Author FROM Inventory WHERE ISBN = {bookID[0]}')
+            cursor.execute(f'SELECT Title, Author, ISBN FROM Inventory WHERE ISBN = {bookID[0]}')
             currentBook = cursor.fetchall() #gives us a list of tuples (Title, Author)
 
             """
             Formating view cart to the following:
-            #. Title by Author
+            #. Title by Author (ISBN)
 
             """
             tmp = list(currentBook[0])#convert currentBook's title author to list
 
             #output in format to console
             print(f'{counter}. ', end='')
-            print(tmp[0], 'by', tmp[1])
+            print(f'{tmp[0]} by {tmp[1]} ({tmp[2]})')
 
             counter = counter+1
 
@@ -96,7 +96,6 @@ class Cart():
     def removeFromCart(self, userID, ISBN):
         try:
             connection = sqlite3.connect(self.databaseName)
-            #print(f'Connected to {self.databaseName}!')
         except:
             print("Failed to connect")
             sys.exit()
@@ -134,4 +133,3 @@ class Cart():
             #remove row from table:
             cursor.execute(f'DELETE FROM {self.tableName} WHERE UserID = {userID} AND ISBN = {cartItem}')
             connection.commit()
-            

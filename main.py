@@ -2,7 +2,6 @@
 main class for group project
 
 """
-import sqlite3
 from sys import exit
 from Inventory import Inventory
 from Cart import Cart
@@ -91,6 +90,7 @@ def viewingCart(current_user):
 
     #make a temp cart
     temp_cart = Cart('cart.db','cart')
+    temp_inventory = Inventory('Inventory.db', 'Inventory')
     while(True):
         #prompt user
         print('Please input the correct command in order to do the following:')
@@ -101,19 +101,24 @@ def viewingCart(current_user):
             case '1':
                 break #will break out of the loop and also return back to main menu
             case '2':
-                temp_cart.viewCart('Inventory.db') #displays what is in the cart
+                temp_cart.viewCart(current_user.getUserID(),'Inventory.db') #displays what is in the cart
             case '3':
-                #FINISH::
-                #will add something to the cart, need to decide how we will do that
-                #how to display to user what they can add
-                #can either display whole inventory or have them search for a book
-                pass
+                #Prompts user to enter the ISBN that is displayed by viewInventory()
+                #will then add that book to the cart
+                print('What book would you like to add? (Please type ISBN#)')
+                temp_inventory.viewInventory()
+                temp_ISBN = input()
+                temp_cart.addToCart(current_user.getUserID(), temp_ISBN)
+
             case '4':
-                #FINISH::
-                #need to use databases (maybe) to find the ISBN that we need to remove
-                print('What book would you like to remove?')
-                temp_book = input()
-                temp_cart.removeFromCart()
+                #show user what books they can remove
+                print('What book would you like to remove? (Please type ISBN#)')
+                temp_cart.viewCart(current_user.getUserID(), 'Inventory,db')
+                temp_ISBN = input() #get ISBN selection from user
+                
+                #try to remove what user says
+                temp_cart.removeFromCart(current_user.getUserID(), temp_ISBN)
+                print()
             case '5':
                 print('Checking out now')
                 temp_cart.checkOut(current_user.getUserID()) #calls the checkout function and then breaks to main menu
