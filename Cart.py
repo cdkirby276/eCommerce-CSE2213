@@ -49,10 +49,26 @@ class Cart():
             sys.exit()
         cursor = connection.cursor()
 
-        for bookID in result:
-            cursor.execute(f'SELECT Title Author FROM Inventory WHERE ISBN = {bookID[0]}')
-            currentBook = cursor.fetchall() #assuming we get currentBook as a tuple or list
-            print(currentBook) #will have to format the output once we get inventory db
+        counter = 1;
+        for bookID in result:#looping through our matching userIDs
+            cursor.execute(f'SELECT Title, Author FROM Inventory WHERE ISBN = {bookID[0]}')
+            currentBook = cursor.fetchall() #gives us a list of tuples (Title, Author)
+
+            """
+            Formating view cart to the following:
+            #. Title by Author
+
+            """
+            tmp = list(currentBook[0])#convert currentBook's title author to list
+
+            #output in format to console
+            print(f'{counter}. ', end='')
+            print(tmp[0], 'by', tmp[1])
+
+            counter = counter+1
+
+        print()#newline for spacing
+
 
 
     """
@@ -108,30 +124,14 @@ class Cart():
         cursor = connection.cursor()
         cursor.execute(f'SELECT ISBN FROM {self.tableName} WHERE UserID = {userID}')
         result = cursor.fetchall() #gives us a list of tuples
-        
-         #NEED TO FIX
-               #Interaction with Inventory class is not working 
+         
         tmpInventory = Inventory('Inventory.db', 'inventory')
         for temp in result:
-            cartItem = temp[0] #ISBN as an int #must conver to a string
+            cartItem = temp[0] #ISBN as an int must convert to a string
             #update the inventory database accordingly:
-            #!!CALL DECREASE STOCK FUNCTION HERE!!
-            print(cartItem)
             tmpInventory.decreaseStock(cartItem)
-
-
 
             #remove row from table:
             cursor.execute(f'DELETE FROM {self.tableName} WHERE UserID = {userID} AND ISBN = {cartItem}')
             connection.commit()
             
-myCart = Cart('cart.db', 'cart') #have to change the functions to user class fields instead of string literals
-myCart.checkOut("678")
-
-
-
-
-
-
-    
-    
