@@ -51,7 +51,8 @@ class Cart():
 
         counter = 1;
         for bookID in result:#looping through our matching userIDs
-            cursor.execute(f'SELECT Title, Author, ISBN FROM Inventory WHERE ISBN = {bookID[0]}')
+            
+            cursor.execute(f'SELECT Title, Author, ISBN FROM inventory WHERE ISBN = {bookID[0]}')
             currentBook = cursor.fetchall() #gives us a list of tuples (Title, Author)
 
             """
@@ -60,7 +61,8 @@ class Cart():
 
             """
             tmp = list(currentBook[0])#convert currentBook's title author to list
-
+        
+            
             #output in format to console
             print(f'{counter}. ', end='')
             print(f'{tmp[0]} by {tmp[1]} ({tmp[2]})')

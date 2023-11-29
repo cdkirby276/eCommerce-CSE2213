@@ -33,8 +33,6 @@ class Inventory():
 
         try:
             connection = sqlite3.connect("Inventory.db")
-            print("Connected to Inventory.db")
-            print()
         except:
             print("Failed to connect Inventory.db")
             print()
@@ -59,7 +57,6 @@ class Inventory():
         
         try:
             connection = sqlite3.connect("Inventory.db")
-            print("Connected to Inventory.db")
         except:
             print("Failed to connect Inventory.db")
             sys.exit()
@@ -88,8 +85,6 @@ class Inventory():
     def decreaseStock(self, ISBN): #Called with a single ISBN parameter and decreases the stock number in the appropriate database for the appropriate ISBN
         try:
             connection = sqlite3.connect("Inventory.db")
-            print("Connected to Inventory.db")
-            print()
         except:
             print("Failed to connect Inventory.db")
             print()
@@ -116,16 +111,6 @@ class Inventory():
 
 
         quit
-
-
-    """
-    Getters / Setters: Appropriate traditional getters and setters for the class variables can
-    be added to supplement the code
-    """
-
-
-myInventory = Inventory('Inventory.db', 'inventory') #have to change the functions to user class fields instead of string literals
-
 
 
 

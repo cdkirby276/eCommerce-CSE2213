@@ -1,4 +1,12 @@
-use Inventory;
+CREATE TABLE 'inventory' (
+	'ISBN' varchar(13) NOT NULL,
+	'Title' varchar(13) DEFAULT NULL,
+	'Author' varchar(13) DEFAULT NULL,
+	'Genre' varchar(13) DEFAULT NULL,
+	'Pages' varchar(13) DEFAULT NULL,
+	'ReleaseDate' varchar(13) DEFAULT NULL,
+	'Stock' int(2) DEFAULT NULL
+);
 
 INSERT INTO inventory (ISBN, Title, Author, Genre, Pages, ReleaseDate, Stock)
 VALUES
@@ -12,3 +20,4 @@ VALUES
     ('9780452284234', 'The Road', 'Cormac McCarthy', 'Post-apocalyptic fiction', 287, '2006-09-26', 22),
     ('9781400032716', 'The Kite Runner', 'Khaled Hosseini', 'Fiction', 371, '2003-05-29', 17),
     ('9780385472579', 'Brave New World', 'Aldous Huxley', 'Dystopian fiction', 311, '1932-01-01', 8);
+	

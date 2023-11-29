@@ -16,13 +16,11 @@ def main():
         -Logout
     """
     #will create a user and pass it the db and table name for users
-    #currernt_user = User('user.db','User')
-    current_user = User()
-    temp_loginstate = False
+    current_user = User('user.db','User')
 
 
     #loop the prelogin state until someone logs in
-    while(not current_user.getLoggedIn()):
+    while(not(current_user.getLoggedIn())):
         #prompt user to start using the program
         print('Please input the correct command in order to do the following:\n(1)Login\n(2)Logout\n(3)Create Account')
         menuOption = input()
